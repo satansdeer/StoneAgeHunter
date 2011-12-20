@@ -20,12 +20,16 @@ package game
 		}
 
 		public function deactivateIfNot():void {
-			if (!_gameScene.gameContainer.stage.hasEventListener(MouseEvent.MOUSE_MOVE)) {
-				_gameScene.gameContainer.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			if (_gameScene.gameContainer.stage.hasEventListener(MouseEvent.MOUSE_MOVE)) {
+				_gameScene.gameContainer.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			  trace("remove listener");
 			}
 		}
 		public function activateIfNot():void {
-			_gameScene.gameContainer.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			if (!_gameScene.gameContainer.stage.hasEventListener(MouseEvent.MOUSE_MOVE)) {
+				_gameScene.gameContainer.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				trace("add listener");
+			}
 		}
 		
 		protected function onGameContainerAddedToStage(event:Event):void
@@ -34,6 +38,7 @@ package game
 			_stage = _gameScene.gameContainer.stage;
 			_screenCenterX = _gameScene.gameContainer.stage.stageWidth/2;
 			_gameScene.gameContainer.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			trace("add listener");
 			
 		}
 		

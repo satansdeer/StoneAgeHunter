@@ -47,18 +47,18 @@ package game {
 		public function GameScene(container:Sprite, tileMap:TileMap):void {
 			super();
 			_gameContainer = new Sprite();
-			_gameContainer.graphics.beginFill(0,.2);
-			_gameContainer.graphics.drawRect(0,0,WIDTH,HEIGHT);
-			_gameContainer.graphics.endFill();
-			_gameContainer.x = -400;
-			_gameContainer.y = -200;
+			//_gameContainer.graphics.beginFill(0,.2);
+			//_gameContainer.graphics.drawRect(0,0,WIDTH,HEIGHT);
+			//_gameContainer.graphics.endFill();
+			//_gameContainer.x = -400;
+			//_gameContainer.y = -200;
 			_debugPanel = new DebugPanel(container, this);
 			//_debugConsole = new DebugConsole(this);
 			_zSortingManager = new ZSortingManager(this);
 			_parallaxManager = new ParallaxManager(this);
 			_perspectiveManager = new PerspectiveManager(this);
-			//backDecorations = new BackDecorations;
-			//gameContainer.addChild(backDecorations);
+			backDecorations = new BackDecorations;
+			gameContainer.addChild(backDecorations);
 			container.addChild(_gameContainer);
 			_gameContainer.addEventListener(Event.ENTER_FRAME, onGameContainerEnterFrame);
 			container.addEventListener(MouseEvent.MOUSE_DOWN, onContainerMouseDown);
@@ -82,7 +82,7 @@ package game {
 			var toPoint:Point = new Point(_currentMousePoint.x - _gameContainer.x,
 							         							_currentMousePoint.y - _gameContainer.y);
 			TweenLite.killTweensOf(_hunter);
-			_hunter.changeAnimationAndRotation(toPoint)
+			//_hunter.changeAnimationAndRotation(toPoint)
 			TweenLite.to(_hunter,
 				_hunter.computeDuration(new Point(_hunter.x, _hunter.y), toPoint),
 				{ease:Linear.easeNone, realXpos : toPoint.x, y : toPoint.y,
@@ -161,6 +161,7 @@ package game {
 		
 		private function onGameContainerEnterFrame(event:Event):void {
 			_zSortingManager.checkZSorting();
+			/*
 			if (!_hunter) { return; }
 			if (mouseAroundSide()) {
 				_parallaxManager.deactivateIfNot();
@@ -171,6 +172,7 @@ package game {
 			} else {
 				_parallaxManager.activateIfNot();
 			}
+			*/
 		}
 
 		private function mouseAroundSide():Boolean {
