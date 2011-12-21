@@ -14,7 +14,7 @@ import flash.text.TextField;
 	
 	import game.player.Hunter;
 
-import leveleditor.LevelEditor;
+import editor.LevelEditor;
 
 public class DebugPanel {
 		private var _gameSceneContainer:Sprite;

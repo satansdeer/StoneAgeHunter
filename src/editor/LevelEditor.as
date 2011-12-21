@@ -3,10 +3,12 @@
  * Date: 10/22/11
  * Time: 9:13 PM
  */
-package leveleditor {
+package editor {
 import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.geom.Point;
+
+import game.DecorativeObject;
 
 public class LevelEditor {
 	private var _container:Sprite;
@@ -16,6 +18,7 @@ public class LevelEditor {
 		super();
 		_container = container;
 		_panel = new LevelEditorPanel();
+		_panel.addEventListener(EditorPanelEvent.PUT_ELEMENT, onPutElement);
 		_panel.x = position.x;
 		_panel.y = position.y;
 		_panel.closeBtn.addEventListener(MouseEvent.CLICK, onCloseBtnClick);
@@ -30,6 +33,11 @@ public class LevelEditor {
 	}
 
 	/* Internal functions */
+
+	private function onPutElement(event:EditorPanelEvent):void {
+		var element:DecorativeObject = event.element;
+		_container.addChild(element);
+	}
 
 	private function onCloseBtnClick(event:MouseEvent):void {
 		close();
